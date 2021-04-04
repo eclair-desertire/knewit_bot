@@ -72,12 +72,16 @@ def check_answer(message):# обработчик ответов
         javase(message)
     elif message.text=='Python/Django' or message.text=='python' or message.text=='Python' or message.text=='Django' or message.text=='django':
         pydjango(message)
+    elif message.text=='Unity' or message.text=='unity' or message.text=='UNITY' or message.text=='UNITY3D' or message.text=='Unity3D':
+        unity(message)
     elif message.text=='Наши преподаватели':
         teachers(message)
     else:
         bot.send_message(message.chat.id,'Некорректный запрос\n')
 
 def about_us(message):# о компании
+    with open('static_files/knewit_logo.jpg','rb') as snd_png:
+        bot.send_photo(message.chat.id,snd_png)
     bot.send_message(message.chat.id,'7 лет успешного обучения.\nKnewIT – первая школа программирования в Казахстане.\nKnewIT – это профессиональное обучение с возможностью трудоустройства.\nКурсы программирования подходят для уровней beginer, junior и middle developer.\n')
     bot.send_message(message.chat.id,'Наш адрес:\nГ. Алматы , ул. Макатаева 117А, БЦ LOTOS, каб. 423')
 def teachers(message):
@@ -89,56 +93,33 @@ def our_courses(message):# выводит список курсов
     'C#\n'+'JavaSE\n')
     bot.send_message(message.chat.id,'Хотите узнать подробнее о каждом курсе? Нажмите на нужную кнопку\n')
     keyboard=telebot.types.ReplyKeyboardMarkup(True)
-    keyboard.row('Front-end','Python/Django','C++', 'C#', 'JavaSE','В главное меню')
+    keyboard.row('Front-end','Python/Django','C++', 'C#', 'Unity', 'JavaSE','В главное меню')
     bot.send_message(message.chat.id,'Выберите нужную опцию:',reply_markup=keyboard)
 
 def front_end(message):
     bot.send_message(message.chat.id,'Тут будет полная инфа, PLACEHOLDER')
 
+def unity(message):
+    with open('static_files/Unity_Logo.png','rb') as s_photo:
+        bot.send_photo(message.chat.id,s_photo)
+    bot.send_message(message.chat.id,'Продолжительность курса: 3 месяца\n'+'На каждом из этих месяцев вы будете изучать:\n')
+    bot.send_message(message.chat.id,'1 месяц: Первое знакомство с редактором Unity, первая игра, угадайка пароля\n')
+    bot.send_message(message.chat.id,'2 месяц: Углубленное изучение возможностей движка, игра платформер\n')
+    bot.send_message(message.chat.id,'3 месяц: Продвинутое изучение Unity, игра рейл-ган шутер в космосе\n')
+    bot.send_message(message.chat.id,'В одном месяце 13 занятий, занятия проводятся 3 раза в неделю по 2 часа. Расписание обговаривается отдельно с преподавателями\n')
+    bot.send_message(message.chat.id,'На каждом уроке вам будет даваться домашнее задание для закрепления материала\n')
+    bot.send_message(message.chat.id,'По окончанию курса, вы овладеете основными навыками для создания крутых игр!\n')
+    bot.send_message(message.chat.id,'Если вы желаете ознакомиться с курсом подробнее, ниже будет прикреплен учебный план этого курса:\n')
+    with open('static_files/Unity.docx','rb') as send_fl:
+        bot.send_document(message.chat.id,send_fl)
+
 def cplusplus(message):
     with open('static_files/LogoCPP.png','rb') as s_photo:
         bot.send_photo(message.chat.id,s_photo)
-    bot.send_message(message.chat.id,'Продолжительность курса: 3 месяца\n'+'На каждом из этих месяцев вы будете изучать следующие темы:\n')
-    bot.send_message(message.chat.id,'''Месяц 1:
-1.	Установка среды разработки
-2.	Введение в язык и основы синтаксиса
-3.	 Типы данных и переменные
-4.	Операции ввода и вывода
-5.	Арифметические операторы
-6.	Операторы присваивания
-7.	Логические операторы(BOOL подробно), по желанию можно дать битовые операции(необязательно)
-8.	 Математические операции (#include <cmath>)
-9.	 Условия(IF, SWITCH), условные операторы
-10.	Циклы(while, do..while, for, break, continue etc.)
-11.	STRING подробно
-12.	Массивы(Одномерные, двумерные)
-13.	Указатели и ссылки, динамическая память, динамические массивы(vector)
-14.	Методы сортировки(простые)
-15.	Сортировка сложнее buble
-\n''')
-    bot.send_message(message.chat.id,'''Месяц 2:
-1.	Функции
-2.	Параметры функций
-3.	Перегрузка Функций
-4.	Рекурсия
-5.	Структуры
-6.	Вложенные структуры
-7.	Шаблоны
-\n''')
-    bot.send_message(message.chat.id,'''Месяц 3:
-1.	Введение в ООП
-2.	Классы, обьекты
-3.	Методы
-4.	Конструкторы
-5.	Деструкторы
-6.	Модификаторы доступа
-7.	Инкапсуляция
-8.	Наследование
-9.	Полиморфизм
-10.	Работа с файлами
-11.	Исключения
-12.	Знакомство с STL
-\n''')
+    bot.send_message(message.chat.id,'Продолжительность курса: 3 месяца\n'+'На каждом из этих месяцев вы будете изучать:\n')
+    bot.send_message(message.chat.id,'1 месяц: Основы синтаксиса, введение в программирование.\n')
+    bot.send_message(message.chat.id,'2 месяц: углубленное изучение языка, сложные конструкции и функции')
+    bot.send_message(message.chat.id,'3 месяц: ООП, дипломный проект')
     bot.send_message(message.chat.id,'В одном месяце 13 занятий, занятия проводятся 3 раза в неделю по 2 часа. Расписание обговаривается отдельно с преподавателями\n')
     bot.send_message(message.chat.id,'На каждом уроке вам будет даваться домашнее задание для закрепления материала\n')
     bot.send_message(message.chat.id,'По окончанию курса, вы овладаете основными навыками алгоритмизации и программирования, что поможет трудоустроиться в дальнейшем\n')
@@ -148,7 +129,18 @@ def cplusplus(message):
 
 
 def csharp(message):
-    bot.send_message(message.chat.id,'Тут будет полная инфа, PLACEHOLDER')
+    with open('static_files/csharp.jpg','rb') as s_photo:
+        bot.send_photo(message.chat.id,s_photo)
+    bot.send_message(message.chat.id,'Продолжительность курса: 3 месяца\n'+'На каждом из этих месяцев вы будете изучать:\n')
+    bot.send_message(message.chat.id,'1 месяц: Основы синтаксиса, введение в программирование.\n')
+    bot.send_message(message.chat.id,'2 месяц: углубленное изучение языка, сложные конструкции и функции, ООП')
+    bot.send_message(message.chat.id,'3 месяц: GUI, дипломный проект')
+    bot.send_message(message.chat.id,'В одном месяце 13 занятий, занятия проводятся 3 раза в неделю по 2 часа. Расписание обговаривается отдельно с преподавателями\n')
+    bot.send_message(message.chat.id,'На каждом уроке вам будет даваться домашнее задание для закрепления материала\n')
+    bot.send_message(message.chat.id,'По окончанию курса, вы овладаете основными навыками алгоритмизации и программирования, что поможет трудоустроиться в дальнейшем\n')
+    bot.send_message(message.chat.id,'Если вы желаете ознакомиться с курсом подробнее, ниже будет прикреплен учебный план этого курса:\n')
+    with open('static_files/C#.docx','rb') as send_fl:
+        bot.send_document(message.chat.id,send_fl)
 
 def pydjango(message):
     bot.send_message(message.chat.id,'Тут будет полная инфа, PLACEHOLDER')
