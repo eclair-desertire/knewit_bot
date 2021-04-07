@@ -1,8 +1,11 @@
 import os
 import config
 import telebot
+import types
 # from keyboa import keyboa_maker
 Alisher_ID = 1392920598 #(debug)
+Artyom_ID=396364902
+request_var=0
 # easter_egg=0 # Пасхалка
 # Manager_ID=0
 bot=telebot.TeleBot(config.token)
@@ -12,56 +15,86 @@ bot=telebot.TeleBot(config.token)
 @bot.message_handler(commands=['start'])
 def start_message(message): # функция срабатывает при вводе команды /start
     bot.send_message(message.chat.id,'Здравствуйте, вас приветствует консультант-бот школы программирования KnewIT!\nЧто вы хотите узнать? :)') #приветственный текст
-    keyboard=telebot.types.ReplyKeyboardMarkup(False)
-    keyboard.row('Наши курсы','Цены','Оставить заявку', 'О нас','Наши преподаватели','Контакты')
-    bot.send_message(message.chat.id,'Выберите нужную опцию:',reply_markup=keyboard)
-    
+    # bot.send_message(Alisher_ID,message.chat.id) Для получения ID пользователей
+    global request_var
+    request_var=0
+    add_start_buttons(message)
+    # button_s=telebot.types.KeyboardButton(['Наши курсы','Цены','Оставить заявку', 'О нас','Наши преподаватели','Контакты'])
+    # greet_kb1 = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True).add(button_s) Пробы и ошибки переделки клавиатуры
+    # greet_kb1.add(button_s)
+    # bot.send_message(message.chat.id,'TEST',reply_markup=greet_kb1)
 
-@bot.message_handler(commands=['request'])
-def request_send(message): # функция которая отвечает за заявки
-    lst=message.text.split()
-    if len(lst)==4:
-        request=[lst[1],lst[2],lst[3]]
-        bot.send_message(message.chat.id,'Мы вам обязательно перезвоним!\n')
-        bot.send_message(Alisher_ID,'Новая заявка(Бот): \n'+'Имя: '+
-        str(request[0])+'\n'+'Телефон: '+str(request[1])+'\n'+
-        'Курс: '+str(request[2])+'\n')
+    # button_hi = telebot.types.KeyboardButton('Привет!')
+    # button_n=telebot.types.KeyboardButton('None')
+    # greet_kb1 = telebot.types.ReplyKeyboardMarkup(resize_keyboard=True).add(button_hi)
+    # greet_kb1.add(button_n)
+    # bot.send_message(message.chat.id,'TEST',reply_markup=greet_kb1)
+
+    # keyboard=telebot.types.ReplyKeyboardMarkup(resize_keyboard=False)
+    # keyboard.row('Наши курсы','Цены','Оставить заявку', 'О нас','Наши преподаватели','Контакты')
+    # bot.send_message(message.chat.id,'Выберите нужную опцию:',reply_markup=keyboard)
+
+@bot.message_handler(commands=['settings'])
+def admin_panel(message):
+    if message.chat.id==Alisher_ID or message.chat.id==Artyom_ID:
+        bot.send_message(message.chat.id,'Добро пожаловать Сэр, какая отладочная информация вам нужна')
     else:
-        bot.send_message(message.chat.id,'Некорректные данные, пожалуйста введите свои данные еще раз')
-    # if len(lst)==2: Старый обработчик заявок, с запятыми который
-    #     request=lst[1].split(',')
-    #     bot.send_message(message.chat.id,'Мы вам обязательно перезвоним!\n')
-    #     bot.send_message(Alisher_ID,'Новая заявка(Бот): \n'+'Имя: '+
-    #     str(request[0])+'\n'+'Телефон: '+str(request[1])+'\n'+
-    #     'Курс: '+str(request[2])+'\n')
-    # elif len(lst)==4:
-    #     request=lst[1]+lst[2]+lst[3]
-    #     request=request.split(',')
-    #     bot.send_message(message.chat.id,'Мы вам обязательно перезвоним!\n')
-    #     bot.send_message(Alisher_ID,'Новая заявка(Бот): \n'+'Имя: '+
-    #     str(request[0])+'\n'+'Телефон: '+str(request[1])+'\n'+
-    #     'Курс: '+str(request[2])+'\n')
+        bot.send_message(message.chat.id,'Вам недоступна эта опция')
+
+def add_start_buttons(message):
+    buttons_start=['Наши курсы','Цены','Оставить заявку', 'О нас','Наши преподаватели','Контакты']
+    custom_keyboard=telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
+    for i in buttons_start:
+        custom_keyboard.add(telebot.types.KeyboardButton(i))
+    bot.send_message(message.chat.id,'Выберите нужную опцию:',reply_markup=custom_keyboard)
+
+
+# @bot.message_handler(commands=['request']) Старая форма заявок
+# def request_send(message): # функция которая отвечает за заявки
+#     lst=message.text.split()
+#     if len(lst)==4:
+#         request=[lst[1],lst[2],lst[3]]
+#         bot.send_message(message.chat.id,'Мы вам обязательно перезвоним!\n')
+#         bot.send_message(Alisher_ID,'Новая заявка(Бот): \n'+'Имя: '+
+#         str(request[0])+'\n'+'Телефон: '+str(request[1])+'\n'+
+#         'Курс: '+str(request[2])+'\n')
+#     else:
+#         bot.send_message(message.chat.id,'Некорректные данные, пожалуйста введите свои данные еще раз')
+#     # if len(lst)==2: Старый обработчик заявок, с запятыми который
+#     #     request=lst[1].split(',')
+#     #     bot.send_message(message.chat.id,'Мы вам обязательно перезвоним!\n')
+#     #     bot.send_message(Alisher_ID,'Новая заявка(Бот): \n'+'Имя: '+
+#     #     str(request[0])+'\n'+'Телефон: '+str(request[1])+'\n'+
+#     #     'Курс: '+str(request[2])+'\n')
+#     # elif len(lst)==4:
+#     #     request=lst[1]+lst[2]+lst[3]
+#     #     request=request.split(',')
+#     #     bot.send_message(message.chat.id,'Мы вам обязательно перезвоним!\n')
+#     #     bot.send_message(Alisher_ID,'Новая заявка(Бот): \n'+'Имя: '+
+#     #     str(request[0])+'\n'+'Телефон: '+str(request[1])+'\n'+
+#     #     'Курс: '+str(request[2])+'\n')
 
 @bot.message_handler(content_types=['text']) # срабатывает в любом случае когда бот получит текст
 def answer_handler(message):
     check_answer(message)
 
 
-def check_answer(message):# обработчик ответов
+
+def check_answer(message):##Решить проблему с заявками
     if message.text=='Наши курсы':
         our_courses(message)
     elif message.text=='Цены':
         price(message)
     elif message.text=='Оставить заявку':
-        bot.send_message(message.chat.id,'Введите свои данные в таком формате:\n/request Иван +7-800-555-35-35 front-end\n')
+        request_var=1
+        bot.send_message(message.chat.id,'Введите свои данные в таком формате: Иван +7-800-555-35-35 front-end\nИли так: Иван +7-800-555-35-35')
+        bot.send_message(Alisher_ID,str('Req: '+str(request_var))+' '+str(len(message.text.split())))
     elif message.text=='О нас':
         about_us(message)
     elif message.text=='Контакты':
         our_managers(message)
     elif message.text=='В главное меню':
-        keyboard=telebot.types.ReplyKeyboardMarkup(False)
-        keyboard.row('Наши курсы','Цены','Оставить заявку','О нас', 'Наши преподаватели','Контакты')
-        bot.send_message(message.chat.id,'Выберите нужную опцию:',reply_markup=keyboard)
+        add_start_buttons(message)
     elif message.text=='Front-end' or message.text=='front-end' or message.text=='front end' or message.text=='Front end':
         front_end(message)
     elif message.text=='C++' or message.text=='c++':
@@ -76,8 +109,30 @@ def check_answer(message):# обработчик ответов
         unity(message)
     elif message.text=='Наши преподаватели':
         teachers(message)
+    elif (len(message.text.split())==3 or len(message.text.split())==2):
+        request_send(message)
     else:
         bot.send_message(message.chat.id,'Некорректный запрос\n')
+
+
+def request_send(message):
+    # if request_var==0: ##Переменная бесполезна, Тема, если найдешь способ пофикси пожалуйста, если что спроси у меня потом как оно работает
+    send_data=message.text.split()
+    if len(send_data)==3:
+        bot.send_message(message.chat.id,'Ваша заявка принята. Мы вам обязательно перезвоним!\n')
+        bot.send_message(Alisher_ID,'Новая заявка(Бот): \n'+'Имя: '+
+        str(send_data[0])+'\n'+'Телефон: '+str(send_data[1])+'\n'+
+        'Курс: '+str(send_data[2])+'\n')
+        request_var=0
+    elif len(send_data)==2:
+        bot.send_message(message.chat.id,'Ваша заявка принята. Мы вам обязательно перезвоним!\n')
+        bot.send_message(Alisher_ID,'Новая заявка(Бот): \n'+'Имя: '+
+        str(send_data[0])+'\n'+'Телефон: '+str(send_data[1]))
+        request_var=0
+    else:
+        bot.send_message(message.chat.id,'Некорректные данные')
+    # else:
+    #     bot.send_message(message.chat.id,'Некорректный запрос\n')
 
 def about_us(message):# о компании
     with open('static_files/knewit_logo.jpg','rb') as snd_png:
@@ -92,9 +147,14 @@ def our_courses(message):# выводит список курсов
     'Front-end\n'+'Python/Django\n'+'C++\n'+
     'C#\n'+'JavaSE\n')
     bot.send_message(message.chat.id,'Хотите узнать подробнее о каждом курсе? Нажмите на нужную кнопку\n')
-    keyboard=telebot.types.ReplyKeyboardMarkup(True)
-    keyboard.row('Front-end','Python/Django','C++', 'C#', 'Unity', 'JavaSE','В главное меню')
-    bot.send_message(message.chat.id,'Выберите нужную опцию:',reply_markup=keyboard)
+    buttons_course=['Front-end','Python/Django','C++', 'C#','Unity','JavaSE','В главное меню']
+    custom_keyboard=telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
+    for i in buttons_course:
+        custom_keyboard.add(telebot.types.KeyboardButton(i))
+    bot.send_message(message.chat.id,'Выберите нужную опцию:',reply_markup=custom_keyboard)
+    # keyboard=telebot.types.ReplyKeyboardMarkup(True)
+    # keyboard.row('Front-end','Python/Django','C++', 'C#', 'Unity', 'JavaSE','В главное меню')
+    # bot.send_message(message.chat.id,'Выберите нужную опцию:',reply_markup=keyboard)
 
 def front_end(message):
     bot.send_message(message.chat.id,'Тут будет полная инфа, PLACEHOLDER')
