@@ -2,9 +2,13 @@ import os
 import config
 import telebot
 import types
+import json
+import urllib.request
 # from keyboa import keyboa_maker
 Alisher_ID = 1392920598 #(debug)
 Artyom_ID=396364902
+Nurbek_ID=878878226
+Ruslan_ID=293907463
 request_var=0
 # easter_egg=0 # Пасхалка
 # Manager_ID=0
@@ -87,7 +91,8 @@ def check_answer(message):##Решить проблему с заявками
         price(message)
     elif message.text=='Оставить заявку':
         request_var=1
-        bot.send_message(message.chat.id,'Введите свои данные в таком формате: Иван +7-800-555-35-35 front-end\nИли так: Иван +7-800-555-35-35')
+        msg=bot.send_message(message.chat.id,'Введите свои данные в таком формате: Иван +7-800-555-35-35 front-end\nИли так: Иван +7-800-555-35-35')
+        bot.register_next_step_handler(msg,request_send)
     elif message.text=='О нас':
         about_us(message)
     elif message.text=='Контакты':
@@ -108,8 +113,8 @@ def check_answer(message):##Решить проблему с заявками
         unity(message)
     elif message.text=='Наши преподаватели':
         teachers(message)
-    elif (len(message.text.split())==3 or len(message.text.split())==2):
-        request_send(message)
+    # elif (len(message.text.split())==3 or len(message.text.split())==2):
+    #     request_send(message)
     else:
         bot.send_message(message.chat.id,'Некорректный запрос\n')
 
@@ -122,10 +127,20 @@ def request_send(message):
         bot.send_message(Alisher_ID,'Новая заявка(Бот): \n'+'Имя: '+
         str(send_data[0])+'\n'+'Телефон: '+str(send_data[1])+'\n'+
         'Курс: '+str(send_data[2])+'\n')
+        bot.send_message(Ruslan_ID,'Новая заявка(Бот): \n'+'Имя: '+
+        str(send_data[0])+'\n'+'Телефон: '+str(send_data[1])+'\n'+
+        'Курс: '+str(send_data[2])+'\n')
+        bot.send_message(Nurbek_ID,'Новая заявка(Бот): \n'+'Имя: '+
+        str(send_data[0])+'\n'+'Телефон: '+str(send_data[1])+'\n'+
+        'Курс: '+str(send_data[2])+'\n')
         request_var=0
     elif len(send_data)==2:
         bot.send_message(message.chat.id,'Ваша заявка принята. Мы вам обязательно перезвоним!\n')
         bot.send_message(Alisher_ID,'Новая заявка(Бот): \n'+'Имя: '+
+        str(send_data[0])+'\n'+'Телефон: '+str(send_data[1]))
+        bot.send_message(Ruslan_ID,'Новая заявка(Бот): \n'+'Имя: '+
+        str(send_data[0])+'\n'+'Телефон: '+str(send_data[1]))
+        bot.send_message(Nurbek_ID,'Новая заявка(Бот): \n'+'Имя: '+
         str(send_data[0])+'\n'+'Телефон: '+str(send_data[1]))
         request_var=0
     else:
