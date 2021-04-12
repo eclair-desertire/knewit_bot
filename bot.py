@@ -127,21 +127,21 @@ def request_send(message):
         bot.send_message(Alisher_ID,'Новая заявка(Бот): \n'+'Имя: '+
         str(send_data[0])+'\n'+'Телефон: '+str(send_data[1])+'\n'+
         'Курс: '+str(send_data[2])+'\n')
-        bot.send_message(Ruslan_ID,'Новая заявка(Бот): \n'+'Имя: '+
-        str(send_data[0])+'\n'+'Телефон: '+str(send_data[1])+'\n'+
-        'Курс: '+str(send_data[2])+'\n')
-        bot.send_message(Nurbek_ID,'Новая заявка(Бот): \n'+'Имя: '+
-        str(send_data[0])+'\n'+'Телефон: '+str(send_data[1])+'\n'+
-        'Курс: '+str(send_data[2])+'\n')
+        # bot.send_message(Ruslan_ID,'Новая заявка(Бот): \n'+'Имя: '+
+        # str(send_data[0])+'\n'+'Телефон: '+str(send_data[1])+'\n'+
+        # 'Курс: '+str(send_data[2])+'\n')
+        # bot.send_message(Nurbek_ID,'Новая заявка(Бот): \n'+'Имя: '+
+        # str(send_data[0])+'\n'+'Телефон: '+str(send_data[1])+'\n'+
+        # 'Курс: '+str(send_data[2])+'\n')
         request_var=0
     elif len(send_data)==2:
         bot.send_message(message.chat.id,'Ваша заявка принята. Мы вам обязательно перезвоним!\n')
         bot.send_message(Alisher_ID,'Новая заявка(Бот): \n'+'Имя: '+
         str(send_data[0])+'\n'+'Телефон: '+str(send_data[1]))
-        bot.send_message(Ruslan_ID,'Новая заявка(Бот): \n'+'Имя: '+
-        str(send_data[0])+'\n'+'Телефон: '+str(send_data[1]))
-        bot.send_message(Nurbek_ID,'Новая заявка(Бот): \n'+'Имя: '+
-        str(send_data[0])+'\n'+'Телефон: '+str(send_data[1]))
+        # bot.send_message(Ruslan_ID,'Новая заявка(Бот): \n'+'Имя: '+
+        # str(send_data[0])+'\n'+'Телефон: '+str(send_data[1]))
+        # bot.send_message(Nurbek_ID,'Новая заявка(Бот): \n'+'Имя: '+
+        # str(send_data[0])+'\n'+'Телефон: '+str(send_data[1]))
         request_var=0
     else:
         bot.send_message(message.chat.id,'Некорректные данные')
