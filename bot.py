@@ -98,7 +98,7 @@ def request_send(message):
 def about_us(message):# о компании
     with open('static_files/knewit_logo.jpg','rb') as snd_png:
         bot.send_photo(message.chat.id,snd_png)
-    bot.send_message(message.chat.id,'7 лет успешного обучения.\nKnewIT – первая школа программирования в Казахстане.\nKnewIT – это профессиональное обучение с возможностью трудоустройства.\nКурсы программирования подходят для уровней beginer, junior и middle developer.\n')
+    bot.send_message(message.chat.id,'8 лет успешного обучения.\nKnewIT – первая школа программирования в Казахстане.\nKnewIT – это профессиональное обучение с возможностью трудоустройства.\nКурсы программирования подходят для уровней beginer, junior и middle developer.\n')
     bot.send_message(message.chat.id,'Наш адрес:\nГ. Алматы , ул. Макатаева 117А, БЦ LOTOS, каб. 423')
 def teachers(message):
     bot.send_message(message.chat.id,'ТУТ БУДЕТ ИНФА О ПРЕПОДАХ\n')
@@ -118,7 +118,14 @@ def our_courses(message):# выводит список курсов
 def front_end(message):
     with open('static_files/Front_end.png','rb') as s_photo:
         bot.send_photo(message.chat.id,s_photo)
-    bot.send_message(message.chat.id,'Тут будет полная инфа, PLACEHOLDER')
+    bot.send_message(message.chat.id,'Продолжительность курса: 3 месяца\n'+'На каждом из этих месяцев вы будете изучать:\n')
+    bot.send_message(message.chat.id,'1 месяц: HTML/CSS\n'+
+            '2 месяц: Javascript\n'+
+                '3 месяц: Jquery, дополнения к javascript\n'+
+                '4 месяц: Vue.js\n')
+    bot.send_message(message.chat.id,'В одном месяце 13 занятий, занятия проводятся 3 раза в неделю по 2 часа. Расписание обговаривается отдельно с преподавателями\n')
+    bot.send_message(message.chat.id,'На каждом уроке вам будет даваться домашнее задание для закрепления материала\n')
+    bot.send_message(message.chat.id,'По окончанию курса, вы овладаете основными навыками алгоритмизации и программирования, что поможет трудоустроиться в дальнейшем\n')
 
 def unity(message):
     with open('static_files/Unity_Logo.png','rb') as s_photo:
@@ -169,12 +176,18 @@ def pydjango(message):
 def javase(message):
     with open('static_files/javase.png','rb') as s_photo:
         bot.send_photo(message.chat.id,s_photo)
-    bot.send_message(message.chat.id,'Тут будет полная инфа, PLACEHOLDER')
+    bot.send_message(message.chat.id,'Продолжительность курса: 3 месяца\n'+'На каждом из этих месяцев вы будете изучать:\n')
+    bot.send_message(message.chat.id,'1 месяц: Основы синтаксиса, введение в программирование.\n'+
+            '2 месяц: углубленное изучение языка, сложные конструкции и функции, ООП\n'+
+                '3 месяц: Клиент-серверные приложения, GUI\n')
+    bot.send_message(message.chat.id,'В одном месяце 13 занятий, занятия проводятся 3 раза в неделю по 2 часа. Расписание обговаривается отдельно с преподавателями\n')
+    bot.send_message(message.chat.id,'На каждом уроке вам будет даваться домашнее задание для закрепления материала\n')
+    bot.send_message(message.chat.id,'По окончанию курса, вы овладаете основными навыками алгоритмизации и программирования, что поможет трудоустроиться в дальнейшем\n')
 
 def our_managers(message): # выводит контакты менеджеров
     bot.send_message(message.chat.id,'Наши менеджеры:'+'\n'+'Нурбек: +7-701-938-04-63\n')
 
 def price(message): # выводит цены на курсы
     bot.send_message(message.chat.id,'Цены на наши курсы (оплата помесячная):\nOnline обучение, групповое: 39 000 тенге/мес\nОчное обучение, групповое: 55 000 тенге/мес.\nИндивидуальные занятия: 150 000 тенге/мес.\n')
-if __name__ == '__main__': # Тема, возможно с переменной здесь могут быть проблемы
+if __name__ == '__main__': 
      bot.infinity_polling()
