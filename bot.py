@@ -38,7 +38,7 @@ def answer_handler(message):
 
 
 
-def check_answer(message):##Решить проблему с заявками
+def check_answer(message):
     if message.text=='Наши курсы':
         our_courses(message)
     elif message.text=='Цены':
@@ -91,7 +91,6 @@ def request_send(message):
         # str(send_data[0])+'\n'+'Телефон: '+str(send_data[1]))
         # bot.send_message(Nurbek_ID,'Новая заявка(Бот): \n'+'Имя: '+
         # str(send_data[0])+'\n'+'Телефон: '+str(send_data[1]))
-        request_var=0
     else:
         bot.send_message(message.chat.id,'Некорректные данные')
 
