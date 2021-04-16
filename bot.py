@@ -26,7 +26,7 @@ def admin_panel(message):
         bot.send_message(message.chat.id,'Вам недоступна эта опция')
 
 def add_start_buttons(message):
-    buttons_start=['О нас','Наши курсы','Цены','Оставить заявку','Контакты']
+    buttons_start=['О нас','Наши курсы','Цены','Оставить заявку','Контакты','Оставить предложение по модернизации бота']
     custom_keyboard=telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
     for i in buttons_start:
         custom_keyboard.add(telebot.types.KeyboardButton(i))
@@ -66,9 +66,14 @@ def check_answer(message):
         unity(message)
     elif message.text=='Наши преподаватели':
         teachers(message)
+    elif message.text=='Оставить предложение по модернизации бота':
+        msg=bot.send_message(message.chat.id,'Скажите пожалуйста, как мы могли бы улучшить нашего бота?')
+        bot.register_next_step_handler(msg,up_bot)
     else:
         bot.send_message(message.chat.id,'Некорректный запрос\n')
 
+def up_bot(message):
+    bot.send_message(Alisher_ID,'Предложение по улучшению бота: '+message.text)
 
 def request_send(message):
     send_data=message.text.split()
