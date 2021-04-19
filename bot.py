@@ -82,6 +82,7 @@ def check_answer(message):
 
 def up_bot(message):
     bot.send_message(Alisher_ID,'Предложение по улучшению бота: '+message.text)
+    bot.send_message(message.chat.id,'Спасибо за предложение! Мы обязательно его рассмотрим')
 
 def request_send(message):
     send_data=message.text.split()
