@@ -1,14 +1,16 @@
 import os
 import config
 import telebot
-import types
+from telebot import types
 import json
 import urllib.request
 import sqlite3
+import tg_analytic
 Alisher_ID = 1392920598 #(debug)
 Artyom_ID= 396364902 #(debug)
 Nurbek_ID= 878878226
 Ruslan_ID= 293907463
+Server_IP='5.188.154.95'
 conn = sqlite3.connect('db/knewit_database.db', check_same_thread=False)
 cursor = conn.cursor()
 # easter_egg=0 # Пасхалка
@@ -112,7 +114,15 @@ def about_us(message):# о компании
     with open('static_files/knewit_logo.jpg','rb') as snd_png:
         bot.send_photo(message.chat.id,snd_png)
     bot.send_message(message.chat.id,'8 лет успешного обучения.\nKnewIT – первая школа программирования в Казахстане.\nKnewIT – это профессиональное обучение с возможностью трудоустройства.\nКурсы программирования подходят для уровней beginer, junior и middle developer.\n')
-    bot.send_message(message.chat.id,'Наш адрес:\nГ. Алматы , ул. Макатаева 117А, БЦ LOTOS, каб. 423')
+    keyboard=types.InlineKeyboardMarkup()
+    urlbutton=types.InlineKeyboardButton(text='Наш сайт',url='https://knewit.kz/',callback_data='perehod')
+    keyboard.add(urlbutton)
+    bot.send_message(message.chat.id,'Наш адрес:\nГ. Алматы , ул. Макатаева 117А, БЦ LOTOS, каб. 423',reply_markup=keyboard)
+
+# @bot.callback_query_handler(lambda query: query.data=='perehod')
+# def process_callback(query):
+#     bot.send_message(Alisher_ID,'PERESHEL NA SAYT')
+
 def teachers(message):
     bot.send_message(message.chat.id,'ТУТ БУДЕТ ИНФА О ПРЕПОДАХ\n')
 
