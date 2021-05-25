@@ -1,4 +1,5 @@
 import os
+import time
 import config
 import telebot
 from telebot import types
@@ -72,10 +73,10 @@ def check_answer(message):
         javase(message)
     elif message.text=='Python/Django' or message.text=='python' or message.text=='Python' or message.text=='Django' or message.text=='django':
         pydjango(message)
-    elif message.text=='Unity' or message.text=='unity' or message.text=='UNITY' or message.text=='UNITY3D' or message.text=='Unity3D':
-        unity(message)
-    elif message.text=='Наши преподаватели':
-        teachers(message)
+    # elif message.text=='Unity' or message.text=='unity' or message.text=='UNITY' or message.text=='UNITY3D' or message.text=='Unity3D':
+    #     unity(message)
+    # elif message.text=='Наши преподаватели':
+    #     teachers(message)
     elif message.text=='Оставить предложение по модернизации бота':
         msg=bot.send_message(message.chat.id,'Скажите пожалуйста, как мы могли бы улучшить нашего бота?')
         bot.register_next_step_handler(msg,up_bot)
@@ -130,8 +131,9 @@ def our_courses(message):# выводит список курсов
     bot.send_message(message.chat.id,'Мы предлагаем такие курсы как:\n'+
     'Front-end\n'+'Python/Django\n'+'C++\n'+
     'C#\n'+'JavaSE\n')
+    time.sleep(1)
     bot.send_message(message.chat.id,'Хотите узнать подробнее о каждом курсе? Нажмите на нужную кнопку\n')
-    buttons_course=['Front-end','Python/Django','C++', 'C#','Unity','JavaSE','В главное меню']
+    buttons_course=['Front-end','Python/Django','C++', 'C#','JavaSE','В главное меню']
     custom_keyboard=telebot.types.ReplyKeyboardMarkup(resize_keyboard=True)
     for i in buttons_course:
         custom_keyboard.add(telebot.types.KeyboardButton(i))
@@ -141,11 +143,13 @@ def our_courses(message):# выводит список курсов
 def front_end(message):
     with open('static_files/Front_end.png','rb') as s_photo:
         bot.send_photo(message.chat.id,s_photo)
+    time.sleep(0.5)
     bot.send_message(message.chat.id,'Продолжительность курса: 3 месяца\n'+'На каждом из этих месяцев вы будете изучать:\n')
     bot.send_message(message.chat.id,'1 месяц: HTML/CSS\n'+
             '2 месяц: Javascript\n'+
                 '3 месяц: Jquery, дополнения к javascript\n'+
                 '4 месяц: Vue.js\n')
+    time.sleep(1)
     bot.send_message(message.chat.id,'В одном месяце 13 занятий, занятия проводятся 3 раза в неделю по 2 часа. Расписание обговаривается отдельно с преподавателями\n'+
             'На каждом уроке вам будет даваться домашнее задание для закрепления материала\n'+
             'По окончанию курса, вы овладаете основными навыками алгоритмизации и программирования, что поможет трудоустроиться в дальнейшем\n')
@@ -165,10 +169,12 @@ def unity(message):
 def cplusplus(message):
     with open('static_files/LogoCPP.png','rb') as s_photo:
         bot.send_photo(message.chat.id,s_photo)
+    time.sleep(0.5)
     bot.send_message(message.chat.id,'Продолжительность курса: 3 месяца\n'+'На каждом из этих месяцев вы будете изучать:\n')
     bot.send_message(message.chat.id,'1 месяц: Основы синтаксиса, введение в программирование.\n'+
             '2 месяц: углубленное изучение языка, сложные конструкции и функции\n'+
                 '3 месяц: ООП, дипломный проект\n')
+    time.sleep(1)
     bot.send_message(message.chat.id,'В одном месяце 13 занятий, занятия проводятся 3 раза в неделю по 2 часа. Расписание обговаривается отдельно с преподавателями\n'+
             'На каждом уроке вам будет даваться домашнее задание для закрепления материала\n'+
             'По окончанию курса, вы овладаете основными навыками алгоритмизации и программирования, что поможет трудоустроиться в дальнейшем\n')
@@ -177,10 +183,12 @@ def cplusplus(message):
 def csharp(message):
     with open('static_files/csharp.jpg','rb') as s_photo:
         bot.send_photo(message.chat.id,s_photo)
+    time.sleep(0.5)
     bot.send_message(message.chat.id,'Продолжительность курса: 3 месяца\n'+'На каждом из этих месяцев вы будете изучать:\n')
     bot.send_message(message.chat.id,'1 месяц: Основы синтаксиса, введение в программирование.\n'+
     '2 месяц: углубленное изучение языка, сложные конструкции и функции, ООП\n'+
         '3 месяц: GUI, дипломный проект\n')
+    time.sleep(1)
     bot.send_message(message.chat.id,'В одном месяце 13 занятий, занятия проводятся 3 раза в неделю по 2 часа. Расписание обговаривается отдельно с преподавателями\n'+
             'На каждом уроке вам будет даваться домашнее задание для закрепления материала\n'+
             'По окончанию курса, вы овладаете основными навыками алгоритмизации и программирования, что поможет трудоустроиться в дальнейшем\n')
@@ -189,11 +197,13 @@ def csharp(message):
 def pydjango(message):
     with open('static_files/pydjango.png','rb') as s_photo:
         bot.send_photo(message.chat.id,s_photo)
+    time.sleep(0.5)
     bot.send_message(message.chat.id,'Продолжительность курса: 5 месяцев\n'+'На каждом из этих месяцев вы будете изучать:\n')
     bot.send_message(message.chat.id,'1 месяц: Основы синтаксиса, введение в программирование.\n'+
         '2 месяц: углубленное изучение языка, сложные конструкции и функции, ООП\n'+'3 месяц: GUI, TelegramBot\n'+
         '4 месяц: HTML/CSS/SQL (MySQL/PosgreSQL)\n'+
         '5 месяц: Создание сайтов на Django, дипломный проект\n')
+    time.sleep(1)
     bot.send_message(message.chat.id,'В одном месяце 13 занятий, занятия проводятся 3 раза в неделю по 2 часа. Расписание обговаривается отдельно с преподавателями\n'+
             'На каждом уроке вам будет даваться домашнее задание для закрепления материала\n'+
             'По окончанию курса, вы овладаете основными навыками алгоритмизации и программирования, создания программ, сайтов и ботов, что поможет трудоустроиться в дальнейшем\n')
@@ -202,16 +212,18 @@ def pydjango(message):
 def javase(message):
     with open('static_files/javase.png','rb') as s_photo:
         bot.send_photo(message.chat.id,s_photo)
+    time.sleep(0.5)
     bot.send_message(message.chat.id,'Продолжительность курса: 3 месяца\n'+'На каждом из этих месяцев вы будете изучать:\n')
     bot.send_message(message.chat.id,'1 месяц: Основы синтаксиса, введение в программирование.\n'+
             '2 месяц: углубленное изучение языка, сложные конструкции и функции, ООП\n'+
                 '3 месяц: Клиент-серверные приложения, GUI\n')
+    time.sleep(1)
     bot.send_message(message.chat.id,'В одном месяце 13 занятий, занятия проводятся 3 раза в неделю по 2 часа. Расписание обговаривается отдельно с преподавателями\n'+
             'На каждом уроке вам будет даваться домашнее задание для закрепления материала\n'+
             'По окончанию курса, вы овладаете основными навыками алгоритмизации и программирования, что поможет трудоустроиться в дальнейшем\n')
 
 def our_managers(message): # выводит контакты менеджеров
-    bot.send_message(message.chat.id,'Наши менеджеры:'+'\n'+'Нурбек: +7-701-938-04-63\n')
+    bot.send_message(message.chat.id,'Контакты:'+'\n'+'Нурбек: +7-701-938-04-63\n'+'Анастасия: +7-747-414-7663\n')
 
 def price(message): # выводит цены на курсы
     bot.send_message(message.chat.id,'Цены на наши курсы (оплата помесячная):\nOnline обучение, групповое: 39 000 тенге/мес\nОчное обучение, групповое: 55 000 тенге/мес.\nИндивидуальные занятия: 150 000 тенге/мес.\n')
